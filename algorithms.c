@@ -8,10 +8,16 @@ int* create_array(int size);
 int main() 
 {
     int size;
-    printf("Array size: ");
+    int* array;
+
+    printf("Array size (if size is more than 10 it will randomly fill the array): ");
     scanf("%d", &size);
-    int* array = create_array(size);
+    array = create_array(size);
+    printf("Crated array: ");
+    print_array(array, size);
+    //merge_sort(array, 0, size);
     insertion_sort(array, size);
+
     printf("Ordered array: ");
     print_array(array, size);
     return 0;
@@ -42,6 +48,17 @@ void insertion_sort(int* array, size_t size)
     }
 }
 
+void merge_sort(int* array, size_t p, size_t r)
+{
+    if (p < r) {
+        int q = ceil((p+r)/2);
+        merge_sort(array, p, q);
+        merge_sort(array, q+1, r);
+        //merge(array, p, q, r);
+        printf("%d, %d", p, q)
+    }
+}
+
 void swap(int* m, int* n) 
 {
     int temp = *m;
@@ -55,7 +72,7 @@ void print_array(int* m, size_t size)
     for(int i = 0; i < size-1; i++) {
         printf("%d, ", m[i]);
     }
-    printf("%d]",m[size-1]);
+    printf("%d]\n",m[size-1]);
 }
 
 int* create_array(int size) 
@@ -65,6 +82,15 @@ int* create_array(int size)
     if (m == NULL) {
         printf("Bad Allocation]\n");
         return NULL;
+    }
+
+    if (size > 10) {
+        int max = 1000;
+        int min = -1000;
+        for (int i = 0; i < size; i++) {
+            m[i] = rand() % (max - min + 1) + min;
+        }
+        return m;
     }
 
     for (int i = 0; i < size; i++) {
