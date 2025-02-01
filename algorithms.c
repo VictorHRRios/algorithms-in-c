@@ -1,13 +1,18 @@
 #include <stdio.h>
+#include <stdlib.h>
 void insertion_sort(int*, size_t);
 void swap(int*, int*);
 void print_array(int*, size_t);
+int* create_array(int size);
 
 int main() 
 {
-    int array[] = {10,3,2,1,0};
-    int size = sizeof(array) / sizeof(array[0]);
+    int size;
+    printf("Array size: ");
+    scanf("%d", &size);
+    int* array = create_array(size);
     insertion_sort(array, size);
+    printf("Ordered array: ");
     print_array(array, size);
     return 0;
 }
@@ -51,4 +56,21 @@ void print_array(int* m, size_t size)
         printf("%d, ", m[i]);
     }
     printf("%d]",m[size-1]);
+}
+
+int* create_array(int size) 
+{
+    int *m = malloc(sizeof(size) * size);
+
+    if (m == NULL) {
+        printf("Bad Allocation]\n");
+        return NULL;
+    }
+
+    for (int i = 0; i < size; i++) {
+        printf("[%d]:", i);
+        scanf("%d", &m[i]);
+    }
+
+    return m;
 }
