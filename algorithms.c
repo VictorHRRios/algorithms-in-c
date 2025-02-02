@@ -7,6 +7,7 @@ void print_array(int*, size_t);
 int* create_array(int size);
 void merge_sort(int*, size_t, size_t);
 void merge(int*, size_t, size_t, size_t);
+int binary_search(int*, size_t, size_t, int);
 
 int main() 
 {
@@ -23,6 +24,16 @@ int main()
 
     printf("Ordered array: ");
     print_array(array, size);
+    int search_query;
+    printf("Search for an element: ");
+    scanf("%d", &search_query);
+    int search_index = binary_search(array, 0, size, search_query);
+
+    if (search_index != -1) {
+        printf("FOUND [%d] IN %d\n", search_query, search_index);
+    } else {
+        printf("NOT FOUND\n");
+    }
     return 0;
 }
 
@@ -36,6 +47,22 @@ function insertionSort(array):
             j = j - 1
         array[j + 1] = key  // Insert key at the correct position
 */
+
+int binary_search(int* array, size_t p, size_t r, int target)
+{
+    if (p < r) {
+        int q = (p+(r-1))/2;
+        if (array[q] == target) {
+            return q;
+        } else if (target < array[q]) {
+            return binary_search(array, p, q, target);
+        } else {
+            return binary_search(array, q+1, r, target);
+        }
+    } else {
+        return -1;
+    }
+}
 
 void insertion_sort(int* array, size_t size) 
 {
@@ -54,7 +81,7 @@ void insertion_sort(int* array, size_t size)
 void merge_sort(int* array, size_t p, size_t r)
 {
     if (p < r) {
-        int q = (p+r)/2;
+        int q = p+(r-p)/2;
         merge_sort(array, p, q);
         merge_sort(array, q+1, r);
         merge(array, p, q, r);
@@ -65,17 +92,8 @@ void merge(int* array, size_t p, size_t q, size_t r)
 {
     int c_size = q-p+1;
     int v_size = r-q;
-
-    int *c = malloc(sizeof(int) * (c_size));
-    if (c == NULL) {
-        printf("Bad Allocation]\n");
-        return NULL;
-    }
-    int *v = malloc(sizeof(int) * (v_size));
-    if (v == NULL) {
-        printf("Bad Allocation]\n");
-        return NULL;
-    }
+    int c[c_size];
+    int v[v_size];
 
     for (int i = 0; i < c_size; i++) {
         c[i] = array[i+p];
