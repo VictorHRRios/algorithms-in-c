@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include<math.h>
 void insertion_sort(int*, size_t);
 void swap(int*, int*);
 void print_array(int*, size_t);
 int* create_array(int size);
+void merge_sort(int*, size_t, size_t);
+void merge(int*, size_t, size_t, size_t);
 
 int main() 
 {
@@ -15,8 +18,8 @@ int main()
     array = create_array(size);
     printf("Crated array: ");
     print_array(array, size);
-    //merge_sort(array, 0, size);
-    insertion_sort(array, size);
+    merge_sort(array, 0, size-1);
+    //insertion_sort(array, size);
 
     printf("Ordered array: ");
     print_array(array, size);
@@ -51,11 +54,59 @@ void insertion_sort(int* array, size_t size)
 void merge_sort(int* array, size_t p, size_t r)
 {
     if (p < r) {
-        int q = ceil((p+r)/2);
+        int q = (p+r)/2;
         merge_sort(array, p, q);
         merge_sort(array, q+1, r);
-        //merge(array, p, q, r);
-        printf("%d, %d", p, q)
+        merge(array, p, q, r);
+    }
+}
+
+void merge(int* array, size_t p, size_t q, size_t r)
+{
+    int c_size = q-p+1;
+    int v_size = r-q;
+
+    int *c = malloc(sizeof(int) * (c_size));
+    if (c == NULL) {
+        printf("Bad Allocation]\n");
+        return NULL;
+    }
+    int *v = malloc(sizeof(int) * (v_size));
+    if (v == NULL) {
+        printf("Bad Allocation]\n");
+        return NULL;
+    }
+
+    for (int i = 0; i < c_size; i++) {
+        c[i] = array[i+p];
+    }
+    for (int i = 0; i < v_size; i++) {
+        v[i] = array[i+q+1];
+    }
+
+    int c_index = 0;
+    int v_index = 0;
+    int k = p;
+
+    while (c_index < c_size && v_index < v_size) {
+            if (c[c_index] < v[v_index]) {
+                array[k] = c[c_index];
+                c_index++;
+            } else {
+                array[k] = v[v_index];
+                v_index++;
+            }
+            k++; 
+    }
+    while (c_index < c_size) {
+        array[k] = c[c_index];
+        c_index++;
+        k++;
+    }
+    while (v_index < v_size) {
+        array[k] = v[v_index];
+        v_index++;
+        k++;
     }
 }
 
