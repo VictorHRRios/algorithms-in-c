@@ -13,8 +13,9 @@ int main()
     array = create_array(size);
     printf("Crated array: ");
     print_array(array, size);
-    merge_sort(array, 0, size-1);
+    //merge_sort(array, 0, size-1);
     //insertion_sort(array, size);
+    selection_sort(array, size);
 
     printf("Ordered array: ");
     print_array(array, size);

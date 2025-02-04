@@ -1,5 +1,21 @@
 #include "sorts.h"
 #include "utils.h"
+
+void selection_sort(int* array, size_t size) {
+    for (int i = 0; i < size-1; i++) {
+        int min_j = i;
+        int min_x = array[i];
+        for (int j = i+1; j < size; j++) {
+            if (array[j] < min_x) {
+                min_j = j;
+                min_x = array[j];
+            }
+        }
+        array[min_j] = array[i];
+        array[i] = min_x;
+    }
+}
+
 void insertion_sort(int* array, size_t size) 
 {
     int key, j;
