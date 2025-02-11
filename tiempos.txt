@@ -1,0 +1,60 @@
+insertion
+10000, 0.000098
+insertion
+    0000, 0.000163
+    insertion
+    30000, 0.000217
+    insertion
+    40000, 0.000286
+    insertion
+50000, 0.000329
+insertion
+60000, 0.000425
+insertion
+70000, 0.000502
+insertion
+80000, 0.000502
+insertion
+90000, 0.000406
+insertion
+100000, 0.000550
+selection
+10000, 0.147190
+selection
+20000, 0.606506
+selection
+30000, 1.383655
+selection
+40000, 2.488964
+selection
+50000, 3.985107
+selection
+60000, 5.351356
+selection
+70000, 7.371805
+selection
+80000, 9.633584
+selection
+90000, 12.256744
+selection
+100000, 16.778433
+merge
+10000, 0.001922
+merge
+20000, 0.003949
+merge
+30000, 0.005349
+merge
+40000, 0.007910
+merge
+50000, 0.007804
+merge
+60000, 0.010477
+merge
+70000, 0.010810
+merge
+80000, 0.013403
+merge
+90000, 0.016268
+merge
+100000, 0.016628
